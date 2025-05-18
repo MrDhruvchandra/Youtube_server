@@ -7,18 +7,9 @@ app = FastAPI()
 def fetch_transcript(video_id: str) -> str:
     """
     Fetches the transcript of a YouTube video by its video ID.
-
-    Args:
-        video_id (str): The YouTube video ID.
-
-    Returns:
-        str: A single string containing the full transcript text.
     """
     try:
-        # Fetch the transcript
         transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=['hi', 'en'])
-        
-        # Join all transcript text into a single string
         full_transcript = " ".join([entry['text'] for entry in transcript])
         return full_transcript
     except TranscriptsDisabled:
@@ -34,12 +25,10 @@ def fetch_transcript(video_id: str) -> str:
 def get_transcript(video_id: str):
     """
     API endpoint to fetch the transcript of a YouTube video.
-
-    Args:
-        video_id (str): The YouTube video ID.
-
-    Returns:
-        dict: A dictionary containing the transcript text.
     """
     transcript = fetch_transcript(video_id)
     return {"video_id": video_id, "transcript": transcript}
+
+# ASGI adapter for Vercel
+from fastapi_asgi import AsgiMiddleware
+app = AsgiMiddleware(app)
