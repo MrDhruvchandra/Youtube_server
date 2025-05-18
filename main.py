@@ -28,7 +28,3 @@ def get_transcript(video_id: str):
     """
     transcript = fetch_transcript(video_id)
     return {"video_id": video_id, "transcript": transcript}
-
-# ASGI adapter for Vercel
-from fastapi_asgi import AsgiMiddleware
-app = AsgiMiddleware(app)
