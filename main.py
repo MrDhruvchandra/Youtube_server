@@ -9,8 +9,8 @@ def fetch_transcript(video_id: str) -> str:
     Fetches the transcript of a YouTube video by its video ID.
     """
     proxies = {
-        "http": "http://103.249.120.167:80",
-        "https": "http://81.31.146.20:2082"
+        "http": "http://172.188.122.92:80",
+        "https": "http://143.198.42.182:31280"
     }
     try:
         transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=['hi', 'en'], proxies=proxies)
